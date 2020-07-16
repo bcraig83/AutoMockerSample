@@ -1,0 +1,3 @@
+# AutoMockerSample
+
+Little application that highlights DI in a console app, as well as AutoMocker for testing...
