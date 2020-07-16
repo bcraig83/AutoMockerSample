@@ -42,5 +42,22 @@ namespace Core.Test
             // Assert
             fooServiceStub.Count.ShouldBe(45);
         }
+
+
+        [Fact]
+        public void ShouldPerformMockedBehaviour()
+        {
+            // Arrange
+            var automocker = new AutoMocker();
+            automocker.Use<ISomeOtherService>(x => x.GetSomeValue("value") == 30);
+            var fixture = automocker.CreateInstance<BarService>();
+
+            // Act
+            var result = fixture.DoOtherThing("value");
+
+            // Assert
+            result.ShouldBe(30);
+            automocker.GetMock<ISomeOtherService>().VerifyAll();
+        }
     }
 }
